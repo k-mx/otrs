@@ -4277,9 +4277,9 @@ sub TicketStateList {
 
     # get whole states list
     else {
-        %States = $StateObject->StateList(
-            UserID => $Param{UserID},
-        );
+        my $UserID = $Param{UserID};
+        $UserID    = 1 if $Param{CustomerUserID} && !$UserID;
+        %States    = $StateObject->StateList( UserID => $UserID );
     }
 
     # workflow
